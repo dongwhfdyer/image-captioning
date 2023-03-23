@@ -1,3 +1,17 @@
+# Kuhn notes
+
+When this happened
+
+```
+(smallcap) [pcl@localhost image-captioning]$ python tools/val.py 
+Traceback (most recent call last):
+  File "/home/pcl/proj/image-captioning/tools/val.py", line 19, in <module>
+    from coco_caption.pycocotools.coco import COCO
+ModuleNotFoundError: No module named 'coco_caption'
+```
+
+Just change the dir `coco-caption` to  dir `coco-caption`
+
 # Image Captioning 
 
 Most Image Captioning models are complicated and very hard to test. Traditional Image caption model first encodes the image using [BUTD](https://arxiv.org/abs/1707.07998) model, called the bottom up features. This is a Faster-RCNN model trained on [Visual Genome](https://visualgenome.org/) dataset. And then use an attention or transformer model to generate a caption. There is also the use of [SCST](https://arxiv.org/abs/1612.00563) to improve the results.
@@ -83,7 +97,18 @@ Dataset | Train | Val | Test | Captions / Image | Vocab Size | Avg. Tokens / Cap
   * For COCO, download **COCO2014** images from [COCO](https://cocodataset.org/#download).
   * For Flickr8k, download images from [Official Website](https://forms.illinois.edu/sec/1713398) or if you can't download it, try downloading from [Kaggle](https://www.kaggle.com/adityajn105/flickr8k).
   * For Flickr30k, download images from [Official Website](http://shannon.cs.illinois.edu/DenotationGraph/) or if you can't download it, try downloading from [Kaggle](https://www.kaggle.com/hsankesara/flickr-image-dataset).
+  
+  [Flickr 8k Dataset | Kaggle](https://www.kaggle.com/datasets/adityajn105/flickr8k)
+  
+  [flickr30k-images.tar.gz](https://uofi.app.box.com/s/1cpolrtkckn4hxr1zhmfg0ln9veo6jpl)
 * Download Karpathy splits for COCO, Flickr8k and Flickr30k from [here](http://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip).
+
+```
+wget -c https://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip
+unzip caption_datasets.zip
+rm caption_datasets.zip
+```
+
 * Run the following command to extract image features and tokens:
 
 ```bash
@@ -142,6 +167,8 @@ $ python tools/train.py --cfg CONFIG_FILE.yaml
 ```
 
 ## Evaluation
+
+`gdown 1IdaBtMSvtyzF0ByVaBHtvM0JYSXRExRX`  download `coco_weights.pt` for clipcap's weights for coco dataset
 
 ```bash
 $ python tools/val.py --cfg CONFIG_FILE.yaml

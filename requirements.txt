@@ -3,3 +3,7 @@ regex
 tqdm
 tabulate
 transformers==4.12.5
+matplotlib
+scikit-image
+gensim
+

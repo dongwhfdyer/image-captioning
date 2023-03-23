@@ -28,8 +28,8 @@ def main(root):
         save_path = root / split
         save_path.mkdir(exist_ok=True)
 
-        tsv_path = root / ("Train_GCC-Training.tsv" if split == 'train' else "Validation_GCC-1.1.0-Validation.tsv")
-    
+        tsv_path = root / ("Train_GCC-Training.tsv" if split == 'train' else "val.tsv")
+
         with open(tsv_path, encoding='utf-8') as f:
             lines = f.read().splitlines()
 
@@ -54,6 +54,6 @@ def main(root):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--root', type=str, default='C:\\Users\\sithu\\Documents\\Datasets\\ConceptualCaptions')
+    parser.add_argument('--root', type=str, default='data/ConceptualCaptions')
     args = parser.parse_args()
     main(args.root)

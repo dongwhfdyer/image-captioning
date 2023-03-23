@@ -12,9 +12,20 @@ class MLP(nn.Module):
             nn.Tanh(),
             nn.Linear(ch, embed_dim * feat_len)
         )
-        
+
+        # # rewrite the model seperately
+        # self.linear1 = nn.Linear(feat_dim, ch)
+        # self.tanh = nn.Tanh()
+        # self.linear2 = nn.Linear(ch, embed_dim * feat_len)
+
     def forward(self, x: Tensor) -> Tensor:
         return self.model(x)
+
+        # x = self.linear1(x)
+        # x = self.tanh(x)
+        # x = self.linear2(x)
+
+        return x
 
 
 class ClipCap(nn.Module):
@@ -24,7 +35,7 @@ class ClipCap(nn.Module):
         self.gpt = GPT2LMHeadModel.from_pretrained("gpt2")
         self.gpt_embed_dim = self.gpt.transformer.wte.weight.shape[1]
         self.clip_project = MLP(feat_dim, self.gpt_embed_dim, feat_len)
-        
+
     def forward(self, tokens: Tensor, img_feat: Tensor, mask=None) -> Tensor:
         img_proj = self.clip_project(img_feat).view(-1, self.feat_len, self.gpt_embed_dim)
         text_embed = self.gpt.transformer.wte(tokens)
@@ -39,7 +50,7 @@ class ClipCap(nn.Module):
 
 if __name__ == '__main__':
     model = ClipCap(10)
-    model.load_state_dict(torch.load('checkpoints/clipcap/coco_weights.pt', map_location='cpu'))
+    model.load_state_dict(torch.load('checkpoints/clipcap/coco_prefix_latest.pt', map_location='cpu'))
     img_feat = torch.randn(1, 512)
     tokens = torch.randint(low=0, high=10000, size=(1, 10))
     mask = torch.ones(20)

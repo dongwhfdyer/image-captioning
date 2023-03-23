@@ -1,14 +1,15 @@
-SAVE_DIR          : output
-MODEL             : ClipCap
-WEIGHTS           : checkpoints/clipcap/coco_weights.pt
-DATASET           : COCO
-DATASET_ROOT      : 'C://Users//sithu//Documents//Datasets//COCO2014'
-TRAIN_DATA_PATH   : data/COCO/coco_train.pkl
-VAL_DATA_PATH     : data/COCO/coco_test.pkl
-SEQ_LENGTH        : 10
-BATCH_SIZE        : 8
-EPOCHS            : 100
-EVAL_INTERVAL     : 10
-LR                : 0.001
-WEIGHT_DECAY      : 0.01
-WARMUP            : 10
+SAVE_DIR: output
+MODEL: ClipCap
+WEIGHTS: checkpoints/clipcap/coco_weights.pt
+#WEIGHTS           : checkpoints/clipcap/coco_prefix_latest.pt
+DATASET: COCO
+DATASET_ROOT: data/coco2014/train2014
+TRAIN_DATA_PATH: output/coco2014/coco_train.pkl
+VAL_DATA_PATH: output/coco2014/coco_val.pkl
+SEQ_LENGTH: 10
+BATCH_SIZE: 8
+EPOCHS: 100
+EVAL_INTERVAL: 10
+LR: 0.001
+WEIGHT_DECAY: 0.01
+WARMUP: 10
